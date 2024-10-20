@@ -1,6 +1,7 @@
 # Tripleten-Streamlit
 Exploratory Data Analysis Project with Streamlit for a TripleTen project.
 
-Esto es un proyecto en donde se proporcionan las funcionalidades para crear una aplicacion Web que albergue un Dashboard programado en Streamlit.
+Aplicacion Web basada en un Dashboard hecho con Streamlit.
+Se analiza un archivo de venta de Autos en donde se despliegan graficas de barras para las variables categoricas e histogramas para variables numericas.
 
-Este dashboard 
+Tambien, al inicio de este Dashboard se despliega la Tabla de datos en donde se pueden ver todas las columnas y filas con los valores asi registrados.
