@@ -6,46 +6,54 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+#================================================#
+#                    Bienvenida                  #
+#================================================#
+st.header("ANALISIS VENTA AUTOS")
+
 
 #================================================#
-#                 Leer archivo                   #
+#                   Leer Datos                   #
 #================================================#
-Datos = pd.read_csv("vehicles_us.csv")
+Datos = pd.read_csv("C:/Users/guy3h/Downloads/GitHub/Tripleten-Streamlit/vehicles_us.csv")
 
 
 #================================================#
-#                    Streamlit                   #
+#                Desplegar Tabla                 #
 #================================================#
-st.header("EXAMPLE OF STREAMLIT APP")
-st.write("Ejemplo de Aplicacion en Streamlit")
+st.dataframe(Datos)
 
 
-#-------------------HISTOGRAMA-------------------#
-histButton = st.button("Desplegar Histograma:")
+#================================================#
+#                GRAFICA de BARRAS               #
+#             (columnas categoricas)             #
+#================================================#
+opt = st.radio( label      = "Ver la Grafica de Barra para la Columna siguiente :",
+                options    = Datos.select_dtypes(include='object').columns[:-1],
+                index      = 0,
+                horizontal = True
+               )
 
-if histButton:
-    # desplegar un Mensaje en la aplicacion
-    st.write("Histograma de visualizacion de los datos de venta de Autos")
+Tabla = Datos.groupby(opt)['price'].count()
+Tabla = pd.DataFrame( { opt:Tabla.index, 'conteo':Tabla.values} )
 
-    # crear un histograma
-    fig = px.histogram(Datos, x="odometer")
-
-    # grafica interactiva en Plotly
-    st.plotly_chart(fig, use_container_width=True)
+fig = px.bar( Tabla, x=opt, y='conteo' )
+st.plotly_chart( fig, use_container_width=True )
 
 
+#================================================#
+#                    HISTOGRAMAS                 #
+#               (columnas numericas)             #
+#================================================#
+opt_2 = st.radio( label      = "Construir el Histograma para la Columna siguiente :",
+                options    = Datos.select_dtypes(include=['int64','float64']).columns,
+                index      = 0,
+                horizontal = True
+               )
 
-#--------------GRAFICA DISPERSION-----------------#
-dispButton = st.button("Desplegar Grafica de Dispersion:")
+binNumb = st.slider('Fijar el numero de Bins', min_value=1, max_value=100, value=10, step=1)
 
-if dispButton:
-    # desplegar un Mensaje en la aplicacion
-    st.write("Grafica de Dispersion relativa a los datos")
+fig = px.histogram( Datos, x=opt_2, nbins=binNumb )
+fig.update_traces(marker_line_width=1, marker_line_color="black")
 
-    # crear un histograma
-    fig = px.scatter(Datos, x="odometer", y="price")
-
-    # grafica interactiva en Plotly
-    st.plotly_chart(fig, use_container_width=True)
-
-    
+st.plotly_chart(fig, use_container_width=True)
