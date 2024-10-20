@@ -36,7 +36,7 @@ if histButton:
 
 
 #--------------GRAFICA DISPERSION-----------------#
-dispButton = st.Button("Desplegar Grafica de Dispersion:")
+dispButton = st.button("Desplegar Grafica de Dispersion:")
 
 if dispButton:
     # desplegar un Mensaje en la aplicacion
