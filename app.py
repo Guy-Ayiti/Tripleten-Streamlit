@@ -58,3 +58,44 @@ fig = px.histogram( Datos, x=opt_2, nbins=binNumb )
 fig.update_traces(marker_line_width=1, marker_line_color="black")
 
 st.plotly_chart(fig, use_container_width=True)
+
+
+#~------------Desplegar los 5 primeros-----------#
+orderTab = Tabla.sort_values(by="conteo", ascending=False)
+orderTab = orderTab.iloc[:5, :]
+
+checkBox = st.checkbox("Desplegar las 5 categorias con mayor conteo:")
+if checkBox:
+    st.write(orderTab)
+
+    
+
+#================================================#
+#              GRAFICA DE DISPERSION             #
+#================================================#
+
+columna1, columna2, columna3 = st.columns(3)
+
+
+opt_X = columna1.radio( label      = "Seleccionar la variable del eje X",
+                        options    = Datos.columns,
+                        index      = 0,
+                        horizontal = True
+                      )
+
+opt_Y = columna2.radio( label      = "Seleccionar la variable del eje Y",
+                        options    = Datos.columns,
+                        index      = 0,
+                        horizontal = True
+                      )
+
+flag = columna3.radio( label      = "Seleccionar la variable que marca la categoria",
+                        options    = Datos.columns,
+                        index      = 0,
+                        horizontal = True
+                     )
+
+
+fig = px.scatter(Datos, x=opt_X, y=opt_Y, color=flag)
+
+st.plotly_chart(fig, use_container_width=True)
