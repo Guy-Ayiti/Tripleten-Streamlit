@@ -15,7 +15,7 @@ st.header("ANALISIS VENTA AUTOS")
 #================================================#
 #                   Leer Datos                   #
 #================================================#
-Datos = pd.read_csv("C:/Users/guy3h/Downloads/GitHub/Tripleten-Streamlit/vehicles_us.csv")
+Datos = pd.read_csv("vehicles_us.csv")
 
 
 #================================================#
