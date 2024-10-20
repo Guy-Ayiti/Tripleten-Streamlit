@@ -21,7 +21,8 @@ Datos = pd.read_csv("vehicles_us.csv")
 #================================================#
 #                Desplegar Tabla                 #
 #================================================#
-st.dataframe(Datos)
+# st.dataframe(Datos)
+st.write(Datos)
 
 
 #================================================#
